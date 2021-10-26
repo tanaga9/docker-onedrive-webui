@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+
+  onedrive:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - ONEDRIVE_UID=${PUID}
+      - ONEDRIVE_GID=${PGID}
+    ports:
+      - 8888:8888
+      - 9001:9001
+    volumes:
+      - ./onedrive_conf:/onedrive/conf
+      - ./OneDrive:/onedrive/data
+
+# PUID=`id -u` PGID=`id -g` docker-compose up
