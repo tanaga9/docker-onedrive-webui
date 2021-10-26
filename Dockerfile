@@ -8,7 +8,7 @@ ENTRYPOINT [""]
 COPY config /etc/onedrive/
 COPY supervisord.conf /etc/
 RUN mkdir /work
-COPY OneDriveLogin.ipynb /work/
+COPY *.ipynb /work/
 WORKDIR /work
 
 EXPOSE 8888 9001
