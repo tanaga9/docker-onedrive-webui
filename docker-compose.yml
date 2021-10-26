@@ -8,6 +8,8 @@ services:
     environment:
       - ONEDRIVE_UID=${PUID}
       - ONEDRIVE_GID=${PGID}
+      #- ONEDRIVE_ARGS=--monitor --confdir /onedrive/conf --syncdir /onedrive/data
+      #- ONEDRIVE_ARGS=--monitor --confdir /onedrive/conf --syncdir /onedrive/data --single-directory Sync
     ports:
       - 8888:8888
       - 9001:9001

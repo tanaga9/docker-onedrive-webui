@@ -5,6 +5,7 @@ RUN pip install jupyterlab supervisor # oauthlib requests
 
 ENTRYPOINT [""]
 
+COPY config /etc/onedrive/
 COPY supervisord.conf /etc/
 RUN mkdir /work
 COPY OneDriveLogin.ipynb /work/

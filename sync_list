@@ -1,0 +1,6 @@
+# sync_list supports comments
+# 
+# The ordering of entries is highly recommended - exclusions before inclusions
+#
+# To enable selective sync create a file named `sync_list` in `~/.config/onedrive`.
+# 
