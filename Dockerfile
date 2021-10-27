@@ -1,7 +1,7 @@
 FROM driveone/onedrive:alpine
 
 RUN apk update && apk --no-cache add python3-dev py3-pip gcc musl-dev linux-headers zeromq-dev libffi-dev nginx
-RUN pip install jupyterlab supervisor # oauthlib requests
+RUN pip install jupyterlab supervisor json2html
 
 ENTRYPOINT [""]
 
