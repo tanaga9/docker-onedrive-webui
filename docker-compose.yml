@@ -11,8 +11,7 @@ services:
       #- ONEDRIVE_ARGS=--monitor --confdir /onedrive/conf --syncdir /onedrive/data
       #- ONEDRIVE_ARGS=--monitor --confdir /onedrive/conf --syncdir /onedrive/data --single-directory Sync
     ports:
-      - 8888:8888
-      - 9001:9001
+      - 8080:8080
     volumes:
       - ./onedrive_conf:/onedrive/conf
       - ./OneDrive:/onedrive/data

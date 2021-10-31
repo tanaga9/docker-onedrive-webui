@@ -1,0 +1,58 @@
+static_resources:
+  listeners:
+  - name: public-http
+    address:
+      socket_address:
+        protocol: TCP
+        address: 0.0.0.0
+        port_value: 8080
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          upgrade_configs:
+          - upgrade_type: websocket
+          stream_idle_timeout: 100000s
+          http2_protocol_options:
+            max_concurrent_streams: 1024
+          route_config:
+            virtual_hosts:
+            - name: http_all
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: /jupyter
+                route:
+                  cluster: jupyter
+              - match:
+                  prefix: /
+                route:
+                  timeout: 100000s
+                  cluster: supervisord
+          http_filters:
+          - name: envoy.filters.http.router
+  clusters:
+  - name: jupyter
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: jupyter
+      endpoints:
+      - lb_endpoints:
+          endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8888
+  - name: supervisord
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: supervisord
+      endpoints:
+      - lb_endpoints:
+          endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 9001
