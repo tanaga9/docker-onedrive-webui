@@ -1,0 +1,6 @@
+FROM node:16-alpine
+
+RUN apk add bash
+RUN npm install -g @vue/cli
+
+CMD ["/bin/sh", "-c", "cd /dashboard && yarn serve"]
