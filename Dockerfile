@@ -1,8 +1,9 @@
 FROM envoyproxy/envoy-alpine:v1.20-latest AS envoy
 FROM driveone/onedrive:alpine
 
-RUN apk update && apk --no-cache add python3-dev py3-pip gcc musl-dev linux-headers zeromq-dev libffi-dev nginx
+RUN apk update && apk --no-cache add python3-dev py3-pip gcc musl-dev linux-headers zeromq-dev libffi-dev nginx curl
 RUN pip install jupyterlab supervisor json2html
+RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
 ENTRYPOINT [""]
 

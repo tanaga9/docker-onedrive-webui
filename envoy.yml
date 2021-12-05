@@ -27,6 +27,10 @@ static_resources:
                 route:
                   cluster: jupyter
               - match:
+                  prefix: /filebrowser
+                route:
+                  cluster: filebrowser
+              - match:
                   prefix: /
                 route:
                   timeout: 100000s
@@ -45,6 +49,17 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8888
+  - name: filebrowser
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: filebrowser
+      endpoints:
+      - lb_endpoints:
+          endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8081
   - name: supervisord
     type: STRICT_DNS
     load_assignment:
