@@ -10,7 +10,7 @@ ENTRYPOINT [""]
 COPY config /etc/onedrive/
 COPY supervisord.conf /etc/
 RUN mkdir /work
-COPY *.ipynb /work/
+COPY notebooks /work/
 WORKDIR /work
 RUN mkdir /etc/envoy
 COPY envoy.yml /etc/envoy/
