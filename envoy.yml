@@ -27,6 +27,14 @@ static_resources:
                 route:
                   cluster: jupyter
               - match:
+                  prefix: /api
+                route:
+                  cluster: api
+              - match:
+                  prefix: /dashboard
+                route:
+                  cluster: dashboard
+              - match:
                   prefix: /filebrowser
                 route:
                   cluster: filebrowser
@@ -49,6 +57,28 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8888
+  - name: api
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: api
+      endpoints:
+      - lb_endpoints:
+          endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 3000
+  - name: dashboard
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: dashboard
+      endpoints:
+      - lb_endpoints:
+          endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8082
   - name: filebrowser
     type: STRICT_DNS
     load_assignment:
