@@ -25,6 +25,8 @@ COPY envoy.yml /etc/envoy/
 COPY dashboard /dashboard/
 COPY notebooks /work/
 
+RUN cd /dashboard && yarn install && yarn build
+
 WORKDIR /work
 
 EXPOSE 8888 9001
