@@ -39,6 +39,10 @@ static_resources:
                 route:
                   cluster: filebrowser
               - match:
+                  prefix: /sqlite
+                route:
+                  cluster: sqlite
+              - match:
                   prefix: /
                 route:
                   timeout: 100000s
@@ -90,6 +94,17 @@ static_resources:
               socket_address:
                 address: 127.0.0.1
                 port_value: 8081
+  - name: sqlite
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: sqlite
+      endpoints:
+      - lb_endpoints:
+          endpoint:
+            address:
+              socket_address:
+                address: 127.0.0.1
+                port_value: 8083
   - name: supervisord
     type: STRICT_DNS
     load_assignment:
